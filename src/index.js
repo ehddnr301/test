@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/cap", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+// mongoose.connect("mongodb://localhost:27017/cap", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false,
+// });
 
 // const db = mongoose.connection;
 
