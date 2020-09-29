@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 
 const app = express();
 
+const PORT = process.env.PORT || 4000;
+
 // mongoose.connect("mongodb://localhost:27017/cap", {
 //   useNewUrlParser: true,
 //   useFindAndModify: false,
@@ -19,7 +21,7 @@ const app = express();
 
 const handleListening = () => console.log(`✅ Hi`);
 
-app.listen(4000, handleListening);
+app.listen(PORT, handleListening);
 
 app.get("/", (req, res) => res.send("hi"));
 app.get("/fromRaspberry", (req, res) => {
