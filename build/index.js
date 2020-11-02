@@ -57,40 +57,67 @@ app.get("/fromApp", function (req, res) {
 app.get("/test", function (req, res) {
   res.status(200).json('test');
 });
-app.get("/makeData", /*#__PURE__*/function () {
+app.get("/seeData", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
     var a;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return _cap["default"].create({
-              isHelmet: True
-            });
+            _context.next = 2;
+            return _cap["default"].find({});
 
-          case 3:
+          case 2:
             a = _context.sent;
             res.status(200).json(a);
-            _context.next = 10;
-            break;
 
-          case 7:
-            _context.prev = 7;
-            _context.t0 = _context["catch"](0);
-            res.status(400);
-
-          case 10:
+          case 4:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee);
   }));
 
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
+  };
+}());
+app.get("/makeData", /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
+    var a;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return _cap["default"].create({
+              isHelmet: true
+            });
+
+          case 3:
+            a = _context2.sent;
+            res.status(200).send('hi');
+            _context2.next = 11;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0);
+            res.status(400).send(_context2.t0);
+
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
   };
 }());
 //# sourceMappingURL=index.js.map

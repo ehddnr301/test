@@ -45,10 +45,11 @@ app.get("/seeData", async(req,res)=> {
 app.get("/makeData", async(req, res) => {
   try{
     const a = await Cap.create({
-      isHelmet:True,
+      isHelmet:true,
     })
     res.status(200).send('hi')
-  }catch(e){
-    res.status(400).send(e)
+  }catch(err){
+    console.log(err)
+    res.status(400).send(err)
   }
 })
