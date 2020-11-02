@@ -48,7 +48,7 @@ app.get("/makeData", async(req, res) => {
       isHelmet:True,
     })
     res.status(200).send('hi')
-  }catch{
-    res.status(400).send('no')
+  }catch(e){
+    res.status(400).send(e)
   }
 })
