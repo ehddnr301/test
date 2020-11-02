@@ -38,6 +38,10 @@ app.get("/fromApp", (req, res) => {
 app.get("/test",(req,res)=> {
   res.status(200).json('test')
 })
+app.get("/seeData", async(req,res)=> {
+  const a = await Cap.find({})
+  res.status(200).json(a)
+})
 app.get("/makeData", async(req, res) => {
   try{
     const a = await Cap.create({
