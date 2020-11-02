@@ -47,8 +47,8 @@ app.get("/makeData", async(req, res) => {
     const a = await Cap.create({
       isHelmet:True,
     })
-    res.status(200).json(a)
+    res.status(200).send('hi')
   }catch{
-    res.status(400)
+    res.status(400).send('no')
   }
 })
