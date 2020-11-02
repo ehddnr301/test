@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -37,13 +38,13 @@ app.get("/fromApp", (req, res) => {
 app.get("/test",(req,res)=> {
   res.status(200).json('test')
 })
-// app.get("/makeData", async(req, res) => {
-//   try{
-//     const a = await Cap.create({
-//       isHelmet:True,
-//     })
-//     res.status(200).json(a)
-//   }catch{
-//     res.status(400)
-//   }
-// })
+app.get("/makeData", async(req, res) => {
+  try{
+    const a = await Cap.create({
+      isHelmet:True,
+    })
+    res.status(200).json(a)
+  }catch{
+    res.status(400)
+  }
+})
