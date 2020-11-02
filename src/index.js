@@ -1,23 +1,25 @@
 import express from "express";
 import mongoose from "mongoose";
+import Cap from "./cap"
 
 const app = express();
 
 const PORT = process.env.PORT || 4000;
 
-// mongoose.connect("mongodb://localhost:27017/cap", {
-//   useNewUrlParser: true,
-//   useFindAndModify: false,
-// });
+mongoose.connect(process.env.MONGO, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
 
-// const db = mongoose.connection;
+const db = mongoose.connection;
 
-// const handleOpen = () => console.log("✅  Connected to DB");
-// const handleError = (error) =>
-//   console.log(`❌ Error on DB Connection:${error}`);
+const handleOpen = () => console.log("✅  Connected to DB");
+const handleError = (error) =>
+  console.log(`❌ Error on DB Connection:${error}`);
 
-// db.once("open", handleOpen);
-// db.on("error", handleError);
+db.once("open", handleOpen);
+db.on("error", handleError);
 
 const handleListening = () => console.log(`✅ Hi`);
 
@@ -30,3 +32,16 @@ app.get("/fromRaspberry", (req, res) => {
 app.get("/fromApp", (req, res) => {
   res.status(200).json("fromApp success");
 });
+app.get("/test",(req,res)=> {
+  res.status(200).json('test')
+})
+app.get("/makeData", async(req, res) => {
+  try{
+    const a = await Cap.create({
+      isHelmet:True,
+    })
+    res.status(200).json(a)
+  }catch{
+    res.status(400)
+  }
+})

@@ -7,10 +7,12 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var app = (0, _express["default"])();
+var PORT = process.env.PORT || 4000;
 
-_mongoose["default"].connect("mongodb://localhost:27017/cap", {
+_mongoose["default"].connect("mongodb+srv://ehddnr:pqYE7AuwBzG7hvS@graph-todo.0rugc.mongodb.net/graphql-todo?retryWrites=true&w=majority", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 
 var db = _mongoose["default"].connection;
@@ -27,10 +29,10 @@ db.once("open", handleOpen);
 db.on("error", handleError);
 
 var handleListening = function handleListening() {
-  return console.log("\u2705  Listening on: http://localhost:4000");
+  return console.log("\u2705 Hi");
 };
 
-app.listen(4000, handleListening);
+app.listen(PORT, handleListening);
 app.get("/", function (req, res) {
   return res.send("hi");
 });
