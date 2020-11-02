@@ -38,14 +38,25 @@ app.get("/fromApp", (req, res) => {
 app.get("/test",(req,res)=> {
   res.status(200).json('test')
 })
-app.get("/seeData", async(req,res)=> {
+app.get("/seeAllData", async(req,res)=> {
   const a = await Cap.find({})
   res.status(200).json(a)
 })
-app.get("/makeData", async(req, res) => {
+app.get("/helmetTrue", async(req, res) => {
   try{
-    const a = await Cap.create({
+    await Cap.create({
       isHelmet:true,
+    })
+    res.status(200).send('hi')
+  }catch(err){
+    console.log(err)
+    res.status(400).send(err)
+  }
+})
+app.get("/helmetFalse", async(req, res) => {
+  try{
+    await Cap.create({
+      isHelmet:false,
     })
     res.status(200).send('hi')
   }catch(err){
