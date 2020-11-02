@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config()
 import Cap from "./cap"
 
 const app = express();
