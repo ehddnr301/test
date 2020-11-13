@@ -54,24 +54,56 @@ app.get("/fromRaspberry", function (req, res) {
 app.get("/fromApp", function (req, res) {
   res.status(200).json("fromApp success");
 });
-app.get("/test", function (req, res) {
-  res.status(200).json('test');
-});
-app.get("/seeData", /*#__PURE__*/function () {
+app.get("/test", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-    var a;
+    var date, aa, b;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            date = req.query.date; // await Cap.findOne({
+            //   createdAt:
+            // })
+
+            if (!date) {
+              _context.next = 13;
+              break;
+            }
+
+            if (!(date.length === 8)) {
+              _context.next = 10;
+              break;
+            }
+
+            _context.next = 5;
             return _cap["default"].find({});
 
-          case 2:
-            a = _context.sent;
-            res.status(200).json(a);
+          case 5:
+            aa = _context.sent;
+            b = aa.filter(function (a) {
+              var getDate = JSON.stringify(a.createdAt).split("T")[0].substring(1).split("-").join("");
 
-          case 4:
+              if (getDate === date) {
+                return getDate;
+              } else {
+                return null;
+              }
+            });
+            res.status(200).json(b);
+            _context.next = 11;
+            break;
+
+          case 10:
+            res.status(400).send("worng date input");
+
+          case 11:
+            _context.next = 14;
+            break;
+
+          case 13:
+            res.status(400).send("give me date");
+
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -83,41 +115,100 @@ app.get("/seeData", /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }());
-app.get("/makeData", /*#__PURE__*/function () {
+app.get("/seeAllData", /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
     var a;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return _cap["default"].create({
-              isHelmet: true
-            });
+            _context2.next = 2;
+            return _cap["default"].find({});
 
-          case 3:
+          case 2:
             a = _context2.sent;
-            res.status(200).send('hi');
-            _context2.next = 11;
-            break;
+            res.status(200).json(a);
 
-          case 7:
-            _context2.prev = 7;
-            _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
-            res.status(400).send(_context2.t0);
-
-          case 11:
+          case 4:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2);
   }));
 
   return function (_x3, _x4) {
     return _ref2.apply(this, arguments);
+  };
+}());
+app.get("/helmetTrue", /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+    var password;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            try {
+              password = req.query.password;
+
+              if (password === "capston") {
+                // await Cap.create({
+                //   isHelmet: true,
+                // });
+                res.status(200).send("data created");
+              } else {
+                res.status(400).send("wrong password");
+              }
+            } catch (err) {
+              console.log(err);
+              res.status(400).send(err);
+            }
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function (_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}());
+app.get("/helmetFalse", /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+    var password;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            try {
+              password = req.query.password;
+
+              if (password === "capston") {
+                // await Cap.create({
+                //   isHelmet: false,
+                // });
+                res.status(200).send("data created");
+              } else {
+                res.status(400).send("wrong password");
+              }
+            } catch (err) {
+              console.log(err);
+              res.status(400).send(err);
+            }
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
   };
 }());
 //# sourceMappingURL=index.js.map
